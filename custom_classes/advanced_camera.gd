@@ -11,4 +11,4 @@ func _process(delta: float) -> void:
 		
 		offset._add(effect.tick(delta))
 	
-	print(offset.position_offset)
+	## TO DO

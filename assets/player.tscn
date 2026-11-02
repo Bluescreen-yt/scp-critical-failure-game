@@ -1,0 +1,303 @@
+[gd_scene format=3 uid="uid://dx6j4n8qednen"]
+
+[ext_resource type="Shader" uid="uid://cqmmu4tfxwsq7" path="res://shaders/bloody_screen.gdshader" id="1_insbl"]
+[ext_resource type="Script" uid="uid://gpfmn4whtdai" path="res://custom_classes/player.gd" id="1_rug40"]
+[ext_resource type="Script" uid="uid://bfl2nwwt1pyg1" path="res://component/advanced_health_component.gd" id="4_mxi64"]
+[ext_resource type="Script" uid="uid://buo5i0necfkd3" path="res://scripts/blood_effect.gd" id="4_nsdob"]
+[ext_resource type="Script" uid="uid://1ty7y1hnhtem" path="res://custom_classes/advanced_camera.gd" id="4_uovkd"]
+[ext_resource type="Script" uid="uid://dbswuae0ohr0r" path="res://abstract_classes/camera_effect/ce_shake.gd" id="5_jeibo"]
+[ext_resource type="Script" uid="uid://c4w3h852pid1j" path="res://component/advanced_health_body.gd" id="6_nsdob"]
+[ext_resource type="Script" uid="uid://qu3f1nn58te3" path="res://component/health_component.gd" id="6_yceh7"]
+[ext_resource type="Script" uid="uid://3womgmvsvgi0" path="res://component/liquid_container_component.gd" id="7_uovkd"]
+
+[sub_resource type="Gradient" id="Gradient_mxi64"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nsdob"]
+gradient = SubResource("Gradient_mxi64")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0s560"]
+frequency = 0.0063
+fractal_type = 2
+fractal_octaves = 1
+domain_warp_enabled = true
+domain_warp_frequency = 0.025
+domain_warp_fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_isng4"]
+noise = SubResource("FastNoiseLite_0s560")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pbnwl"]
+shader = ExtResource("1_insbl")
+shader_parameter/noise = SubResource("NoiseTexture2D_isng4")
+shader_parameter/gradient = SubResource("GradientTexture2D_nsdob")
+shader_parameter/blood_color = Color(0.8204217, 0.19071287, 0.15936801, 1)
+shader_parameter/add = 0.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_isng4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pbnwl"]
+
+[node name="Player" type="RigidBody3D" unique_id=1681117369 node_paths=PackedStringArray("health")]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("1_rug40")
+health = NodePath("AdvancedHealthComponent")
+metadata/_custom_type_script = "uid://gpfmn4whtdai"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1704360978]
+
+[node name="Blood" type="ColorRect" parent="CanvasLayer" unique_id=353177943 node_paths=PackedStringArray("health_component")]
+material = SubResource("ShaderMaterial_pbnwl")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_nsdob")
+shader_noise = SubResource("FastNoiseLite_0s560")
+noise_pulse = SubResource("FastNoiseLite_0s560")
+blood_shader = SubResource("ShaderMaterial_pbnwl")
+health_component = NodePath("../../AdvancedHealthComponent")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=400317808]
+mesh = SubResource("CapsuleMesh_isng4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=927863618]
+shape = SubResource("CapsuleShape3D_pbnwl")
+
+[node name="onFloor" type="RayCast3D" parent="." unique_id=360191147]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9854189, 0)
+target_position = Vector3(0, -0.09, 0)
+
+[node name="Y" type="Node3D" parent="." unique_id=454479740]
+
+[node name="Camera-origin" type="Node3D" parent="Y" unique_id=1158958254]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4960441, 0)
+
+[node name="Camera" type="Camera3D" parent="Y/Camera-origin" unique_id=2106944681 node_paths=PackedStringArray("camera_effects")]
+unique_name_in_owner = true
+current = true
+script = ExtResource("4_uovkd")
+camera_effects = [NodePath("CameraEffectShake")]
+metadata/_custom_type_script = "uid://1ty7y1hnhtem"
+
+[node name="CameraEffectShake" type="Node" parent="Y/Camera-origin/Camera" unique_id=1439565027]
+script = ExtResource("5_jeibo")
+metadata/_custom_type_script = "uid://dbswuae0ohr0r"
+
+[node name="AdvancedHealthComponent" type="Node" parent="." unique_id=497971128]
+script = ExtResource("4_mxi64")
+metadata/_custom_type_script = "uid://bfl2nwwt1pyg1"
+
+[node name="Head" type="Node" parent="AdvancedHealthComponent" unique_id=876915107 node_paths=PackedStringArray("health", "blood")]
+script = ExtResource("6_nsdob")
+health = NodePath("HealthComponent")
+blood = NodePath("LiquidContainerComponent")
+metadata/_custom_type_script = "uid://c4w3h852pid1j"
+
+[node name="HealthComponent" type="Node" parent="AdvancedHealthComponent/Head" unique_id=13022964]
+script = ExtResource("6_yceh7")
+metadata/_custom_type_script = "uid://qu3f1nn58te3"
+
+[node name="LiquidContainerComponent" type="Node" parent="AdvancedHealthComponent/Head" unique_id=966503358]
+script = ExtResource("7_uovkd")
+metadata/_custom_type_script = "uid://3womgmvsvgi0"
+
+[node name="LeftUpperArm" type="Node" parent="AdvancedHealthComponent" unique_id=191163011 node_paths=PackedStringArray("health", "blood")]
+script = ExtResource("6_nsdob")
+health = NodePath("HealthComponent")
+blood = NodePath("LiquidContainerComponent")
+metadata/_custom_type_script = "uid://c4w3h852pid1j"
+
+[node name="HealthComponent" type="Node" parent="AdvancedHealthComponent/LeftUpperArm" unique_id=419324078]
+script = ExtResource("6_yceh7")
+metadata/_custom_type_script = "uid://qu3f1nn58te3"
+
+[node name="LiquidContainerComponent" type="Node" parent="AdvancedHealthComponent/LeftUpperArm" unique_id=542372489]
+script = ExtResource("7_uovkd")
+metadata/_custom_type_script = "uid://3womgmvsvgi0"
+
+[node name="LeftLowerArm" type="Node" parent="AdvancedHealthComponent" unique_id=1892726868 node_paths=PackedStringArray("health", "blood")]
+script = ExtResource("6_nsdob")
+health = NodePath("HealthComponent")
+blood = NodePath("LiquidContainerComponent")
+metadata/_custom_type_script = "uid://c4w3h852pid1j"
+
+[node name="HealthComponent" type="Node" parent="AdvancedHealthComponent/LeftLowerArm" unique_id=288836490]
+script = ExtResource("6_yceh7")
+metadata/_custom_type_script = "uid://qu3f1nn58te3"
+
+[node name="LiquidContainerComponent" type="Node" parent="AdvancedHealthComponent/LeftLowerArm" unique_id=247071538]
+script = ExtResource("7_uovkd")
+metadata/_custom_type_script = "uid://3womgmvsvgi0"
+
+[node name="LeftHand" type="Node" parent="AdvancedHealthComponent" unique_id=663977491 node_paths=PackedStringArray("health", "blood")]
+script = ExtResource("6_nsdob")
+health = NodePath("HealthComponent")
+blood = NodePath("LiquidContainerComponent")
+metadata/_custom_type_script = "uid://c4w3h852pid1j"
+
+[node name="HealthComponent" type="Node" parent="AdvancedHealthComponent/LeftHand" unique_id=501572766]
+script = ExtResource("6_yceh7")
+metadata/_custom_type_script = "uid://qu3f1nn58te3"
+
+[node name="LiquidContainerComponent" type="Node" parent="AdvancedHealthComponent/LeftHand" unique_id=1665983208]
+script = ExtResource("7_uovkd")
+metadata/_custom_type_script = "uid://3womgmvsvgi0"
+
+[node name="RightUpperArm" type="Node" parent="AdvancedHealthComponent" unique_id=784550415 node_paths=PackedStringArray("health", "blood")]
+script = ExtResource("6_nsdob")
+health = NodePath("HealthComponent")
+blood = NodePath("LiquidContainerComponent")
+metadata/_custom_type_script = "uid://c4w3h852pid1j"
+
+[node name="HealthComponent" type="Node" parent="AdvancedHealthComponent/RightUpperArm" unique_id=1004355514]
+script = ExtResource("6_yceh7")
+metadata/_custom_type_script = "uid://qu3f1nn58te3"
+
+[node name="LiquidContainerComponent" type="Node" parent="AdvancedHealthComponent/RightUpperArm" unique_id=1904715304]
+script = ExtResource("7_uovkd")
+metadata/_custom_type_script = "uid://3womgmvsvgi0"
+
+[node name="RightLowerArm" type="Node" parent="AdvancedHealthComponent" unique_id=1856073196 node_paths=PackedStringArray("health", "blood")]
+script = ExtResource("6_nsdob")
+health = NodePath("HealthComponent")
+blood = NodePath("LiquidContainerComponent")
+metadata/_custom_type_script = "uid://c4w3h852pid1j"
+
+[node name="HealthComponent" type="Node" parent="AdvancedHealthComponent/RightLowerArm" unique_id=427503696]
+script = ExtResource("6_yceh7")
+metadata/_custom_type_script = "uid://qu3f1nn58te3"
+
+[node name="LiquidContainerComponent" type="Node" parent="AdvancedHealthComponent/RightLowerArm" unique_id=1024407112]
+script = ExtResource("7_uovkd")
+metadata/_custom_type_script = "uid://3womgmvsvgi0"
+
+[node name="RightHand" type="Node" parent="AdvancedHealthComponent" unique_id=136683195 node_paths=PackedStringArray("health", "blood")]
+script = ExtResource("6_nsdob")
+health = NodePath("HealthComponent")
+blood = NodePath("LiquidContainerComponent")
+metadata/_custom_type_script = "uid://c4w3h852pid1j"
+
+[node name="HealthComponent" type="Node" parent="AdvancedHealthComponent/RightHand" unique_id=1397326965]
+script = ExtResource("6_yceh7")
+metadata/_custom_type_script = "uid://qu3f1nn58te3"
+
+[node name="LiquidContainerComponent" type="Node" parent="AdvancedHealthComponent/RightHand" unique_id=235327260]
+script = ExtResource("7_uovkd")
+metadata/_custom_type_script = "uid://3womgmvsvgi0"
+
+[node name="UpperTorso" type="Node" parent="AdvancedHealthComponent" unique_id=1024272842 node_paths=PackedStringArray("health", "blood")]
+script = ExtResource("6_nsdob")
+health = NodePath("HealthComponent")
+blood = NodePath("LiquidContainerComponent")
+metadata/_custom_type_script = "uid://c4w3h852pid1j"
+
+[node name="HealthComponent" type="Node" parent="AdvancedHealthComponent/UpperTorso" unique_id=2041802784]
+script = ExtResource("6_yceh7")
+metadata/_custom_type_script = "uid://qu3f1nn58te3"
+
+[node name="LiquidContainerComponent" type="Node" parent="AdvancedHealthComponent/UpperTorso" unique_id=586982940]
+script = ExtResource("7_uovkd")
+metadata/_custom_type_script = "uid://3womgmvsvgi0"
+
+[node name="LowerTorso" type="Node" parent="AdvancedHealthComponent" unique_id=1215169858 node_paths=PackedStringArray("health", "blood")]
+script = ExtResource("6_nsdob")
+health = NodePath("HealthComponent")
+blood = NodePath("LiquidContainerComponent")
+metadata/_custom_type_script = "uid://c4w3h852pid1j"
+
+[node name="HealthComponent" type="Node" parent="AdvancedHealthComponent/LowerTorso" unique_id=1101709542]
+script = ExtResource("6_yceh7")
+metadata/_custom_type_script = "uid://qu3f1nn58te3"
+
+[node name="LiquidContainerComponent" type="Node" parent="AdvancedHealthComponent/LowerTorso" unique_id=2123465042]
+script = ExtResource("7_uovkd")
+metadata/_custom_type_script = "uid://3womgmvsvgi0"
+
+[node name="LeftUpperLeg" type="Node" parent="AdvancedHealthComponent" unique_id=903411042 node_paths=PackedStringArray("health", "blood")]
+script = ExtResource("6_nsdob")
+health = NodePath("HealthComponent")
+blood = NodePath("LiquidContainerComponent")
+metadata/_custom_type_script = "uid://c4w3h852pid1j"
+
+[node name="HealthComponent" type="Node" parent="AdvancedHealthComponent/LeftUpperLeg" unique_id=763601697]
+script = ExtResource("6_yceh7")
+metadata/_custom_type_script = "uid://qu3f1nn58te3"
+
+[node name="LiquidContainerComponent" type="Node" parent="AdvancedHealthComponent/LeftUpperLeg" unique_id=2047386562]
+script = ExtResource("7_uovkd")
+metadata/_custom_type_script = "uid://3womgmvsvgi0"
+
+[node name="LeftLowerLeg" type="Node" parent="AdvancedHealthComponent" unique_id=355278473 node_paths=PackedStringArray("health", "blood")]
+script = ExtResource("6_nsdob")
+health = NodePath("HealthComponent")
+blood = NodePath("LiquidContainerComponent")
+metadata/_custom_type_script = "uid://c4w3h852pid1j"
+
+[node name="HealthComponent" type="Node" parent="AdvancedHealthComponent/LeftLowerLeg" unique_id=1631654322]
+script = ExtResource("6_yceh7")
+metadata/_custom_type_script = "uid://qu3f1nn58te3"
+
+[node name="LiquidContainerComponent" type="Node" parent="AdvancedHealthComponent/LeftLowerLeg" unique_id=980669237]
+script = ExtResource("7_uovkd")
+metadata/_custom_type_script = "uid://3womgmvsvgi0"
+
+[node name="LeftFoot" type="Node" parent="AdvancedHealthComponent" unique_id=1045554719 node_paths=PackedStringArray("health", "blood")]
+script = ExtResource("6_nsdob")
+health = NodePath("HealthComponent")
+blood = NodePath("LiquidContainerComponent")
+metadata/_custom_type_script = "uid://c4w3h852pid1j"
+
+[node name="HealthComponent" type="Node" parent="AdvancedHealthComponent/LeftFoot" unique_id=1419239146]
+script = ExtResource("6_yceh7")
+metadata/_custom_type_script = "uid://qu3f1nn58te3"
+
+[node name="LiquidContainerComponent" type="Node" parent="AdvancedHealthComponent/LeftFoot" unique_id=606415146]
+script = ExtResource("7_uovkd")
+metadata/_custom_type_script = "uid://3womgmvsvgi0"
+
+[node name="RightUpperLeg" type="Node" parent="AdvancedHealthComponent" unique_id=1161270394 node_paths=PackedStringArray("health", "blood")]
+script = ExtResource("6_nsdob")
+health = NodePath("HealthComponent")
+blood = NodePath("LiquidContainerComponent")
+metadata/_custom_type_script = "uid://c4w3h852pid1j"
+
+[node name="HealthComponent" type="Node" parent="AdvancedHealthComponent/RightUpperLeg" unique_id=1723698864]
+script = ExtResource("6_yceh7")
+metadata/_custom_type_script = "uid://qu3f1nn58te3"
+
+[node name="LiquidContainerComponent" type="Node" parent="AdvancedHealthComponent/RightUpperLeg" unique_id=1466875792]
+script = ExtResource("7_uovkd")
+metadata/_custom_type_script = "uid://3womgmvsvgi0"
+
+[node name="RightLowerLeg" type="Node" parent="AdvancedHealthComponent" unique_id=2114016856 node_paths=PackedStringArray("health", "blood")]
+script = ExtResource("6_nsdob")
+health = NodePath("HealthComponent")
+blood = NodePath("LiquidContainerComponent")
+metadata/_custom_type_script = "uid://c4w3h852pid1j"
+
+[node name="HealthComponent" type="Node" parent="AdvancedHealthComponent/RightLowerLeg" unique_id=1668156731]
+script = ExtResource("6_yceh7")
+metadata/_custom_type_script = "uid://qu3f1nn58te3"
+
+[node name="LiquidContainerComponent" type="Node" parent="AdvancedHealthComponent/RightLowerLeg" unique_id=436768123]
+script = ExtResource("7_uovkd")
+metadata/_custom_type_script = "uid://3womgmvsvgi0"
+
+[node name="RightFoot" type="Node" parent="AdvancedHealthComponent" unique_id=840511368 node_paths=PackedStringArray("health", "blood")]
+script = ExtResource("6_nsdob")
+health = NodePath("HealthComponent")
+blood = NodePath("LiquidContainerComponent")
+metadata/_custom_type_script = "uid://c4w3h852pid1j"
+
+[node name="HealthComponent" type="Node" parent="AdvancedHealthComponent/RightFoot" unique_id=784085149]
+script = ExtResource("6_yceh7")
+metadata/_custom_type_script = "uid://qu3f1nn58te3"
+
+[node name="LiquidContainerComponent" type="Node" parent="AdvancedHealthComponent/RightFoot" unique_id=2145585258]
+script = ExtResource("7_uovkd")
+metadata/_custom_type_script = "uid://3womgmvsvgi0"

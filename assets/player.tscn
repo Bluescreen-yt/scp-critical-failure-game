@@ -198,6 +198,48 @@ metadata/_custom_type_script = "uid://qu3f1nn58te3"
 script = ExtResource("7_uovkd")
 metadata/_custom_type_script = "uid://3womgmvsvgi0"
 
+[node name="Heart" type="Node" parent="AdvancedHealthComponent" unique_id=971139588 node_paths=PackedStringArray("health", "blood")]
+script = ExtResource("6_nsdob")
+health = NodePath("HealthComponent")
+blood = NodePath("LiquidContainerComponent")
+metadata/_custom_type_script = "uid://c4w3h852pid1j"
+
+[node name="HealthComponent" type="Node" parent="AdvancedHealthComponent/Heart" unique_id=1040788625]
+script = ExtResource("6_yceh7")
+metadata/_custom_type_script = "uid://qu3f1nn58te3"
+
+[node name="LiquidContainerComponent" type="Node" parent="AdvancedHealthComponent/Heart" unique_id=1198036636]
+script = ExtResource("7_uovkd")
+metadata/_custom_type_script = "uid://3womgmvsvgi0"
+
+[node name="LeftLung" type="Node" parent="AdvancedHealthComponent" unique_id=708009203 node_paths=PackedStringArray("health", "blood")]
+script = ExtResource("6_nsdob")
+health = NodePath("HealthComponent")
+blood = NodePath("LiquidContainerComponent")
+metadata/_custom_type_script = "uid://c4w3h852pid1j"
+
+[node name="HealthComponent" type="Node" parent="AdvancedHealthComponent/LeftLung" unique_id=762669677]
+script = ExtResource("6_yceh7")
+metadata/_custom_type_script = "uid://qu3f1nn58te3"
+
+[node name="LiquidContainerComponent" type="Node" parent="AdvancedHealthComponent/LeftLung" unique_id=1730241505]
+script = ExtResource("7_uovkd")
+metadata/_custom_type_script = "uid://3womgmvsvgi0"
+
+[node name="RightLung" type="Node" parent="AdvancedHealthComponent" unique_id=1602900444 node_paths=PackedStringArray("health", "blood")]
+script = ExtResource("6_nsdob")
+health = NodePath("HealthComponent")
+blood = NodePath("LiquidContainerComponent")
+metadata/_custom_type_script = "uid://c4w3h852pid1j"
+
+[node name="HealthComponent" type="Node" parent="AdvancedHealthComponent/RightLung" unique_id=543695650]
+script = ExtResource("6_yceh7")
+metadata/_custom_type_script = "uid://qu3f1nn58te3"
+
+[node name="LiquidContainerComponent" type="Node" parent="AdvancedHealthComponent/RightLung" unique_id=602889237]
+script = ExtResource("7_uovkd")
+metadata/_custom_type_script = "uid://3womgmvsvgi0"
+
 [node name="LowerTorso" type="Node" parent="AdvancedHealthComponent" unique_id=1215169858 node_paths=PackedStringArray("health", "blood")]
 script = ExtResource("6_nsdob")
 health = NodePath("HealthComponent")

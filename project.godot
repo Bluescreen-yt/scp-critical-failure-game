@@ -13,7 +13,7 @@ config_version=5
 config/name="scp-godot"
 run/main_scene="uid://cpdrcl2ar2bpy"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://texture/icon/icon.svg"
 
 [display]
 

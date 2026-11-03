@@ -11,4 +11,5 @@ func _process(delta: float) -> void:
 		
 		offset._add(effect.tick(delta))
 	
-	## TO DO
+	position = offset.position_offset + base_offset.position_offset
+	rotation = offset.rotation_offset + base_offset.rotation_offset

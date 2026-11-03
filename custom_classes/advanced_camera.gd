@@ -1,4 +1,5 @@
-@icon("res://dev_textures/camera.png") class_name AdvancedCamera extends Camera3D
+@icon("res://dev_textures/camera.png")
+class_name AdvancedCamera extends Camera3D
 
 @export var camera_effects :Array[CameraEffect] = []
 @export var base_offset :CameraOffset = null

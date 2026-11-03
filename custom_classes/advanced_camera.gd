@@ -2,7 +2,7 @@
 class_name AdvancedCamera extends Camera3D
 
 @export var camera_effects :Array[CameraEffect] = []
-@export var base_offset :CameraOffset = null
+@export var base_offset :CameraOffset = CameraOffset.new()
 
 func _process(delta: float) -> void:
 	var offset = CameraOffset.new()

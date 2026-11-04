@@ -3,7 +3,12 @@
 @export var speed := 5.0
 @export var health : AdvancedHealthComponent
 @export_range(0.01, 5.0) var sensetivity := 0.15
-var _playerLook := Vector3.ZERO
+@export var camera_sway_effect : CameraEffectOffset
+
+var player_look := Vector3.ZERO
+var player_look_velocity := Vector3.ZERO
+var player_look_velocity_multipler := 0.9
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -29,13 +34,27 @@ func _process(delta: float) -> void:
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			
-	%"Camera-origin".rotation_degrees.x = _playerLook.x
-	$Y.rotation_degrees.y = _playerLook.y
+	
+	_handle_player_rotation(delta)
+
+
+func _handle_player_rotation(delta: float):
+	player_look_velocity *= player_look_velocity_multipler
+	
+	camera_sway_effect.camera_offset.rotation_offset = -player_look_velocity*.0025
+	print(player_look_velocity)
+	
+	%"Camera-origin".rotation_degrees.x = player_look.x
+	$Y.rotation_degrees.y = player_look.y
+
 
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		_playerLook.y -=  event.relative.x * sensetivity
-		_playerLook.x -=  event.relative.y * sensetivity
+		player_look.y -=  event.relative.x * sensetivity
+		player_look.x -=  event.relative.y * sensetivity
 		
-		_playerLook.x = clampf(_playerLook.x, -90, 90)
+		player_look_velocity.y -= event.relative.x * sensetivity
+		player_look_velocity.x -=  event.relative.y * sensetivity
+		
+		player_look.x = clampf(player_look.x, -90, 90)

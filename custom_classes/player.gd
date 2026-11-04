@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			
-	%Camera.rotation_degrees.x = _playerLook.x
+	%"Camera-origin".rotation_degrees.x = _playerLook.x
 	$Y.rotation_degrees.y = _playerLook.y
 
 

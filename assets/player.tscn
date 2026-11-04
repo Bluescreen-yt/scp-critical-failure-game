@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bfl2nwwt1pyg1" path="res://component/advanced_health_component.gd" id="4_mxi64"]
 [ext_resource type="Script" uid="uid://buo5i0necfkd3" path="res://scripts/blood_effect.gd" id="4_nsdob"]
 [ext_resource type="Script" uid="uid://1ty7y1hnhtem" path="res://custom_classes/advanced_camera.gd" id="4_uovkd"]
-[ext_resource type="Script" uid="uid://c4w3h852pid1j" path="res://component/advanced_health_body.gd" id="6_nsdob"]
+[ext_resource type="Script" uid="uid://c4w3h852pid1j" path="res://custom_classes/advanced_health_body.gd" id="6_nsdob"]
 [ext_resource type="Script" uid="uid://qu3f1nn58te3" path="res://component/health_component.gd" id="6_yceh7"]
 [ext_resource type="Script" uid="uid://3womgmvsvgi0" path="res://component/liquid_container_component.gd" id="7_uovkd"]
 
@@ -74,10 +74,10 @@ target_position = Vector3(0, -0.09, 0)
 [node name="Y" type="Node3D" parent="." unique_id=454479740]
 
 [node name="Camera-origin" type="Node3D" parent="Y" unique_id=1158958254]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4960441, 0)
 
 [node name="Camera" type="Camera3D" parent="Y/Camera-origin" unique_id=2106944681]
-unique_name_in_owner = true
 current = true
 script = ExtResource("4_uovkd")
 metadata/_custom_type_script = "uid://1ty7y1hnhtem"

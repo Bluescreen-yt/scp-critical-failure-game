@@ -1,11 +1,47 @@
 [gd_scene format=3 uid="uid://y05gy3aqr6g"]
 
 [ext_resource type="Script" uid="uid://8vq6qi2otjnj" path="res://scripts/health_panel.gd" id="1_4su7v"]
+[ext_resource type="Texture2D" uid="uid://chypglb5ss374" path="res://texture/icon/icon.svg" id="2_kk4tq"]
 
-[node name="PanelContainer" type="PanelContainer" unique_id=1595908827]
+[node name="HealthPanel" type="PanelContainer" unique_id=1595908827]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4su7v")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1311516460]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer" unique_id=2122591451]
+layout_mode = 2
+split_offsets = PackedInt32Array(-113)
+split_offset = -113
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="MarginContainer/HSplitContainer" unique_id=1282496882]
+layout_mode = 2
+size_flags_horizontal = 3
+ratio = 0.75
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HSplitContainer/AspectRatioContainer" unique_id=1408490377]
+clip_contents = true
+layout_mode = 2
+
+[node name="PLACEHOLDER" type="Sprite2D" parent="MarginContainer/HSplitContainer/AspectRatioContainer/PanelContainer" unique_id=97195432]
+position = Vector2(242.99998, 324)
+scale = Vector2(3.7968752, 5.0625)
+texture = ExtResource("2_kk4tq")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/HSplitContainer" unique_id=1876891211]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "No damage
+---------------
+No sickness
+(PLACEHOLDER)"

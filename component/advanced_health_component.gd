@@ -1,7 +1,9 @@
 @icon("res://dev_textures/body.png") class_name AdvancedHealthComponent extends Node
 
-var body: Dictionary[String, AdvHealthBodyParts] = {}
+@export var death_message := ""
+@export var death_message_timer := -0.1
 
+var body: Dictionary[String, AdvHealthBodyParts] = {}
 var condition: float = 100 ## condition
 var condition_percentage: float: ## condition percentage ( from 0.0 to 1.0 )
 	get():
@@ -18,3 +20,13 @@ func _update_body_list():
 func _ready() -> void:
 	self.child_order_changed.connect(_update_body_list)
 	_update_body_list()
+
+func _process(delta: float) -> void:
+	if death_message_timer>=0:
+		var new_death_message_timer := death_message_timer-delta
+		
+		if new_death_message_timer <= 0:
+			death_message = ""
+			new_death_message_timer = -1
+		
+		death_message_timer = new_death_message_timer

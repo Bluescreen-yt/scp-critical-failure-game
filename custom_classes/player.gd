@@ -42,7 +42,7 @@ func _handle_player_rotation(delta: float):
 	player_look_velocity *= player_look_velocity_multipler
 	
 	camera_sway_effect.camera_offset.rotation_offset = -player_look_velocity*.0025
-	print(player_look_velocity)
+	camera_sway_effect.camera_offset.rotation_offset.z += clampf(player_look_velocity.x*.025, -45, 45)
 	
 	%"Camera-origin".rotation_degrees.x = player_look.x
 	$Y.rotation_degrees.y = player_look.y

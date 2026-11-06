@@ -2,14 +2,56 @@
 
 [ext_resource type="PackedScene" uid="uid://dx6j4n8qednen" path="res://assets/player.tscn" id="1_coge5"]
 [ext_resource type="Texture2D" uid="uid://d4kbv5duygjpw" path="res://texture/dirty_lens/lens01.png" id="2_daqws"]
+[ext_resource type="Texture2D" uid="uid://cc24qjmquwyuf" path="res://texture/prototype_grid.png" id="2_rs6on"]
+[ext_resource type="Texture2D" uid="uid://ylugl6q3b2ii" path="res://texture/scp_logo_white.svg" id="3_0eiw2"]
+[ext_resource type="Texture2D" uid="uid://chypglb5ss374" path="res://texture/icon/icon.svg" id="3_rm1js"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_isng4"]
-size = Vector3(15, 0.5, 15)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wpru5"]
+albedo_texture = ExtResource("2_rs6on")
+metallic = 0.1
+roughness = 0.95
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_pbnwl"]
-size = Vector3(15, 0.5, 15)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pbnwl"]
+emission_enabled = true
+emission = Color(1, 0.0627451, 0, 1)
+emission_energy_multiplier = 15.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rs6on"]
+emission_enabled = true
+emission = Color(0.03137255, 1, 0.02745098, 1)
+emission_energy_multiplier = 15.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rm1js"]
+emission_enabled = true
+emission = Color(0.03137255, 0.05490196, 1, 1)
+emission_energy_multiplier = 15.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0eiw2"]
+emission_enabled = true
+emission = Color(0.03137255, 0.05490196, 1, 1)
+emission_energy_multiplier = 15.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e7nro"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 15.0
 
 [sub_resource type="Environment" id="Environment_pbnwl"]
+background_energy_multiplier = 0.2
+ambient_light_energy = 0.0
+tonemap_mode = 4
+ssao_enabled = true
+ssao_radius = 5.96
+ssao_intensity = 7.04
+ssao_power = 1.39955
+ssao_detail = 0.0
+ssao_horizon = 0.61
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_cascades = 8
 glow_enabled = true
 glow_levels/1 = 16.0
 glow_levels/2 = 13.08
@@ -28,23 +70,328 @@ glow_hdr_luminance_cap = 6.79
 glow_map_strength = 0.9
 glow_map = ExtResource("2_daqws")
 volumetric_fog_enabled = true
+volumetric_fog_density = 0.025
+volumetric_fog_emission_energy = 0.0
 volumetric_fog_gi_inject = 0.0
+volumetric_fog_length = 20.0
+volumetric_fog_detail_spread = 3.105794
+volumetric_fog_temporal_reprojection_amount = 0.99
+adjustment_enabled = true
+adjustment_contrast = 1.05
 
 [node name="Node3D" type="Node3D" unique_id=690579098]
 
 [node name="Player" parent="." unique_id=1495826800 instance=ExtResource("1_coge5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1239004, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.3914914, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=205192078]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1257787728]
-mesh = SubResource("BoxMesh_isng4")
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="StaticBody3D" unique_id=1888642901]
+use_collision = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1689415250]
-shape = SubResource("BoxShape3D_pbnwl")
+[node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D" unique_id=1207079238]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.1, 0.35, 1.8999999)
+size = Vector3(40.5, 0.3, 16.2)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D" unique_id=1206544453]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.449999, 7.35, 1.8999999)
+size = Vector3(9.400001, 0.3, 16.2)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D" unique_id=349381250]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6499987, 0.35, 20.05)
+size = Vector3(12.2, 0.3, 20.7)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D" unique_id=1548601651]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9999999, 1.4000001, 5)
+size = Vector3(0.5, 0.2, 1.6)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D" unique_id=1233520288]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.750001, 2.55, -6.1000004)
+size = Vector3(30.800001, 4.7000003, 0.2)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D" unique_id=2068311175]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.046803, 6.75, 1.8361559)
+size = Vector3(20.6, 13.1, 16.300001)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D/CSGBox3D14" unique_id=1230387212]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2999992, -0.4000001, 0.05000043)
+operation = 2
+size = Vector3(17.6, 12.3, 15.400001)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D/CSGBox3D14" unique_id=212023914]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.450001, -4.6000004, 6.7)
+operation = 2
+size = Vector3(11.1, 3.9, 2.1000001)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D/CSGBox3D14" unique_id=1765757904]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4000015, 3.249999, 1.6999993)
+operation = 2
+size = Vector3(1.6, 1.2, 2.1000001)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D/CSGBox3D14" unique_id=38341376]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.950002, 3.2999992, 1.7499995)
+operation = 2
+size = Vector3(2.3, 2.9, 5.8)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D19" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D/CSGBox3D14" unique_id=1902252034]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, -0.34202012, 0, 0.34202012, 0.9396926, -8.950002, 2.3999987, 6.8500004)
+operation = 2
+size = Vector3(2.3, 2.9, 5.8)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D20" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D/CSGBox3D14" unique_id=1445323127]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, -0.34202012, 0, 0.34202012, 0.9396926, -8.950002, -2.4562979, 15.567378)
+size = Vector3(2.3, 0.3, 23.300001)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D" unique_id=981679186]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9500005, 2.0499997, -5.450001)
+size = Vector3(7.4, 3.7, 1.1)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D" unique_id=972542914]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1.9999995, 3.85, 1.9301124)
+size = Vector3(16.1, 7.3, 0.2)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D/CSGBox3D10" unique_id=1994218747]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2999996, -2, -0.049999833)
+operation = 2
+size = Vector3(1.7, 2.7, 0.3)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D/CSGBox3D10" unique_id=57285249]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.549999, -2, -0.049999952)
+operation = 2
+size = Vector3(3.4, 2.7, 0.3)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D/CSGBox3D10" unique_id=1827954655]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9000008, -2.3500001, -0.049999118)
+operation = 2
+size = Vector3(1.5, 2, 0.3)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D/CSGBox3D10" unique_id=383149012]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0499988, -1.7, -0.049999356)
+operation = 2
+size = Vector3(1.4, 1.1, 0.3)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D/CSGBox3D10" unique_id=1466660595]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.500001, -2.5500002, -0.049999118)
+operation = 2
+size = Vector3(1.5, 1.6, 0.3)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D/CSGBox3D10" unique_id=1808992142]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.100001, -2.7500002, -0.049999)
+operation = 2
+size = Vector3(1.5, 1.2, 0.3)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D/CSGBox3D10" unique_id=34685043]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9500012, -1.3731136, -0.1999985)
+operation = 2
+size = Vector3(0.4, 0.4, 0.6)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D" unique_id=750732505]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 6, 1.9859235, -4.934668)
+size = Vector3(1.3000001, 3.8, 1.2)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D" unique_id=1647086628]
+transform = Transform3D(1, 0, 0, 0, 0.86602545, 0.50000006, 0, -0.50000006, 0.86602545, 4.7, 1.798686, -4.369488)
+size = Vector3(1.3000001, 4.2000003, 1.3000001)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D" unique_id=255696837]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.7071068, 0, -0.7071068, 0.70710677, 3.3999996, 1.7368271, -3.5621078)
+size = Vector3(1.3000001, 5, 1.2)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D" unique_id=127139247]
+transform = Transform3D(1, 0, 0, 0, 0.49999994, 0.86602545, 0, -0.86602545, 0.49999994, 2.0999994, 1.4504809, -2.3637505)
+size = Vector3(1.3000001, 6.9, 1.7)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D" unique_id=1741288166]
+transform = Transform3D(1, 0, 0, 0, 0.25881898, 0.9659258, 0, -0.9659258, 0.25881898, 0.79999936, 0.9120737, 1.2082064)
+size = Vector3(1.3000001, 13.400001, 2.6000001)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D" unique_id=443237490]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3, 0.7499998, -1.9000001)
+size = Vector3(2.7, 1.1, 1.8000001)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D/CSGBox3D3" unique_id=334340494]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100000024, -2.3841858e-07)
+operation = 2
+size = Vector3(2.5, 1.3000001, 1.6)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D" unique_id=2031209628]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.75, -3.65)
+size = Vector3(3.3, 3.1000001, 0.1)
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGBox3D4" type="CSGCylinder3D" parent="StaticBody3D/CSGCombiner3D/CSGBox3D12" unique_id=128146679]
+transform = Transform3D(1, 0, 0, 0, 6.7055225e-08, -1, 0, 1, 6.7055225e-08, 0.6500001, 0.5500002, -4.7683716e-07)
+operation = 2
+radius = 0.18
+height = 0.302
+sides = 24
+material = SubResource("StandardMaterial3D_wpru5")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="StaticBody3D/CSGCombiner3D" unique_id=1715558348]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3549504, 2.446425, -2.7218156)
+radius = 0.07
+material = SubResource("StandardMaterial3D_pbnwl")
+
+[node name="OmniLight3D" type="SpotLight3D" parent="StaticBody3D/CSGCombiner3D/CSGSphere3D" unique_id=828267032]
+light_color = Color(1, 0, 0, 1)
+light_energy = 15.0
+light_indirect_energy = 5.0
+light_volumetric_fog_energy = 50.0
+shadow_enabled = true
+spot_range = 25.651
+spot_attenuation = 1.09
+spot_angle = 21.15
+
+[node name="CSGSphere3D5" type="CSGSphere3D" parent="StaticBody3D/CSGCombiner3D" unique_id=1481219156]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6975429, 2.446425, -2.5938106)
+radius = 0.07
+material = SubResource("StandardMaterial3D_pbnwl")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="StaticBody3D/CSGCombiner3D/CSGSphere3D5" unique_id=945680402]
+light_color = Color(1, 0, 0, 1)
+light_energy = 2.0
+light_indirect_energy = 5.0
+light_volumetric_fog_energy = 5.0
+shadow_enabled = true
+omni_range = 246.754
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="StaticBody3D/CSGCombiner3D" unique_id=355295046]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4883657, 2.2596943, -2.7218156)
+radius = 0.07
+material = SubResource("StandardMaterial3D_rs6on")
+
+[node name="OmniLight3D" type="SpotLight3D" parent="StaticBody3D/CSGCombiner3D/CSGSphere3D2" unique_id=121818850]
+light_color = Color(0, 1, 0, 1)
+light_energy = 15.0
+light_indirect_energy = 5.0
+light_volumetric_fog_energy = 50.0
+shadow_enabled = true
+spot_range = 25.651
+spot_attenuation = 1.09
+spot_angle = 21.15
+
+[node name="CSGSphere3D4" type="CSGSphere3D" parent="StaticBody3D/CSGCombiner3D" unique_id=1691663366]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.079513, 2.2596943, -1.7960391)
+radius = 0.07
+material = SubResource("StandardMaterial3D_rs6on")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="StaticBody3D/CSGCombiner3D/CSGSphere3D4" unique_id=1123918531]
+light_color = Color(0, 1, 0, 1)
+light_energy = 2.0
+light_indirect_energy = 5.0
+light_volumetric_fog_energy = 5.0
+shadow_enabled = true
+omni_range = 246.754
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="StaticBody3D/CSGCombiner3D" unique_id=1911275116]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.202364, 2.2596943, -2.7218156)
+radius = 0.07
+material = SubResource("StandardMaterial3D_rm1js")
+
+[node name="OmniLight3D" type="SpotLight3D" parent="StaticBody3D/CSGCombiner3D/CSGSphere3D3" unique_id=185264206]
+light_color = Color(0, 0, 1, 1)
+light_energy = 15.0
+light_indirect_energy = 5.0
+light_volumetric_fog_energy = 50.0
+shadow_enabled = true
+spot_range = 25.651
+spot_attenuation = 1.09
+spot_angle = 21.15
+
+[node name="CSGSphere3D6" type="CSGSphere3D" parent="StaticBody3D/CSGCombiner3D" unique_id=1137016004]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7787724, 2.2596946, 3.3040626)
+radius = 0.07
+material = SubResource("StandardMaterial3D_0eiw2")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="StaticBody3D/CSGCombiner3D/CSGSphere3D6" unique_id=454943802]
+light_color = Color(0, 0, 1, 1)
+light_energy = 2.0
+light_indirect_energy = 5.0
+light_volumetric_fog_energy = 5.0
+shadow_enabled = true
+omni_range = 246.754
+
+[node name="CSGSphere3D7" type="CSGSphere3D" parent="StaticBody3D/CSGCombiner3D" unique_id=1523686717]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.817147, 9.895737, 3.715664)
+radius = 0.07
+material = SubResource("StandardMaterial3D_e7nro")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="StaticBody3D/CSGCombiner3D/CSGSphere3D7" unique_id=821782755]
+light_energy = 0.25
+shadow_enabled = true
+omni_range = 246.754
+
+[node name="SpotLight3D" type="SpotLight3D" parent="StaticBody3D" unique_id=1233105897]
+transform = Transform3D(0.08583167, 0.17364818, -0.98106027, -0.015134437, 0.9848078, 0.17298739, 0.9961947, -2.796976e-09, 0.08715577, 11, 10, 3.6999998)
+light_color = Color(0, 0, 1, 1)
+light_energy = 150.0
+light_indirect_energy = 15.0
+light_projector = ExtResource("3_0eiw2")
+shadow_enabled = true
+spot_range = 4096.0
+spot_angle = 15.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="StaticBody3D" unique_id=1026074292]
+transform = Transform3D(0.08583167, 0.17364818, -0.98106027, -0.015134437, 0.9848078, 0.17298739, 0.9961947, -2.8046396e-09, 0.08715577, 11, 9.9, 3.5999997)
+light_color = Color(1, 0, 0, 1)
+light_energy = 150.0
+light_indirect_energy = 15.0
+light_projector = ExtResource("3_rm1js")
+shadow_enabled = true
+spot_range = 4096.0
+spot_angle = 15.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="StaticBody3D" unique_id=1331073571]
+transform = Transform3D(0.08583167, 0.17364818, -0.98106027, -0.015134437, 0.9848078, 0.17298739, 0.9961947, -2.80464e-09, 0.08715577, 11, 9.9, 3.7999997)
+light_color = Color(0, 1, 0, 1)
+light_energy = 150.0
+light_indirect_energy = 15.0
+light_projector = ExtResource("3_rm1js")
+shadow_enabled = true
+spot_range = 4096.0
+spot_angle = 15.0
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="StaticBody3D" unique_id=1042012168]
+transform = Transform3D(0.071393855, -0.57357645, 0.8160349, 0.049990516, 0.81915206, 0.57139385, -0.9961947, 0, 0.08715581, 0.79999995, 3.8999999, 5.8)
+light_energy = 15.0
+light_volumetric_fog_energy = 5.0
+shadow_enabled = true
+spot_range = 38.542
+spot_attenuation = 0.91
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=918030687]
-transform = Transform3D(1, 0, 0, 0, 0.47442392, 0.8802965, 0, -0.8802965, 0.47442392, 0, 6.676611, -0.07700539)
+transform = Transform3D(-0.4999999, -0.6300432, 0.5941764, 0, 0.6860958, 0.72751117, -0.86602545, 0.36375552, -0.34304783, -8.980737, 6.676611, -0.07700539)
+light_energy = 2.0
+light_indirect_energy = 4.0
+light_volumetric_fog_energy = 2.0
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=753552078]

@@ -5,10 +5,11 @@
 [ext_resource type="Script" uid="uid://bfl2nwwt1pyg1" path="res://component/advanced_health_component.gd" id="4_mxi64"]
 [ext_resource type="Script" uid="uid://buo5i0necfkd3" path="res://scripts/blood_effect.gd" id="4_nsdob"]
 [ext_resource type="Script" uid="uid://1ty7y1hnhtem" path="res://custom_classes/advanced_camera.gd" id="4_uovkd"]
-[ext_resource type="Script" uid="uid://dj7bs3rxq15gx" path="res://abstract_classes/camera_effect/new_script.gd" id="5_cn88q"]
+[ext_resource type="Script" uid="uid://dj7bs3rxq15gx" path="res://abstract_classes/camera_effect/ce_offset.gd" id="5_cn88q"]
 [ext_resource type="Script" uid="uid://bgox166f0fp1h" path="res://custom_resources/camera_offset.gd" id="6_nknpd"]
 [ext_resource type="Script" uid="uid://c4w3h852pid1j" path="res://custom_classes/advanced_health_body.gd" id="6_nsdob"]
 [ext_resource type="Script" uid="uid://qu3f1nn58te3" path="res://component/health_component.gd" id="6_yceh7"]
+[ext_resource type="Script" uid="uid://dbswuae0ohr0r" path="res://abstract_classes/camera_effect/ce_shake.gd" id="7_nknpd"]
 [ext_resource type="Script" uid="uid://3womgmvsvgi0" path="res://component/liquid_container_component.gd" id="7_uovkd"]
 
 [sub_resource type="Gradient" id="Gradient_mxi64"]
@@ -44,13 +45,21 @@ shader_parameter/add = 0.0
 script = ExtResource("6_nknpd")
 metadata/_custom_type_script = "uid://bgox166f0fp1h"
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nknpd"]
+noise_type = 3
+frequency = 0.0555
+fractal_octaves = 3
+fractal_lacunarity = 2.478
+fractal_gain = 0.568
+fractal_ping_pong_strength = 1.472
+
 [node name="Player" type="RigidBody3D" unique_id=1681117369 node_paths=PackedStringArray("health", "camera_sway_effect")]
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 script = ExtResource("1_rug40")
 health = NodePath("AdvancedHealthComponent")
-camera_sway_effect = NodePath("Y/Camera-origin/Camera/CameraEffectOffset")
+camera_sway_effect = NodePath("Y/Camera-origin/Camera/CameraSway")
 metadata/_custom_type_script = "uid://gpfmn4whtdai"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1704360978]
@@ -87,13 +96,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4960441, 0)
 [node name="Camera" type="Camera3D" parent="Y/Camera-origin" unique_id=2106944681 node_paths=PackedStringArray("camera_effects")]
 current = true
 script = ExtResource("4_uovkd")
-camera_effects = [NodePath("CameraEffectOffset")]
+camera_effects = [NodePath("CameraSway"), NodePath("CameraHandheldEffect")]
 metadata/_custom_type_script = "uid://1ty7y1hnhtem"
 
-[node name="CameraEffectOffset" type="Node" parent="Y/Camera-origin/Camera" unique_id=59755553]
+[node name="CameraSway" type="Node" parent="Y/Camera-origin/Camera" unique_id=59755553]
 script = ExtResource("5_cn88q")
 camera_offset = SubResource("Resource_pbnwl")
 metadata/_custom_type_script = "uid://dj7bs3rxq15gx"
+
+[node name="CameraHandheldEffect" type="Node" parent="Y/Camera-origin/Camera" unique_id=381777310]
+script = ExtResource("7_nknpd")
+noise = SubResource("FastNoiseLite_nknpd")
+target_trauma = 1.0
+shake_smoothness = 0.3
+metadata/_custom_type_script = "uid://dbswuae0ohr0r"
 
 [node name="AdvancedHealthComponent" type="Node" parent="." unique_id=497971128]
 script = ExtResource("4_mxi64")

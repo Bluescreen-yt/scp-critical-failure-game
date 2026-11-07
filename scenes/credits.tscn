@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://bvjlmy151y1sj"]
+
+[ext_resource type="Script" uid="uid://l1rlnwt88qva" path="res://scenes/credits.gd" id="1_0bpdh"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_pbnwl"]
+color = Color(0, 0, 0, 0)
+grow_begin = -300.0
+grow_end = -300.0
+
+[node name="Credits" type="Control" unique_id=1321556873]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0bpdh")
+
+[node name="Credits_scroll_container" type="ScrollContainer" parent="." unique_id=327998404]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Credits_scroll_container" unique_id=1733351212]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Entry" type="RichTextLabel" parent="Credits_scroll_container/VBoxContainer" unique_id=561335662]
+visible = false
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "Ignore me.."
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BigSeparator" type="HSeparator" parent="Credits_scroll_container/VBoxContainer" unique_id=1581839106]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 800
+theme_override_styles/separator = SubResource("StyleBoxLine_pbnwl")
+
+[node name="Person" type="RichTextLabel" parent="Credits_scroll_container/VBoxContainer" unique_id=1039382690]
+visible = false
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 15
+bbcode_enabled = true
+text = "Someone"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Separator" type="HSeparator" parent="Credits_scroll_container/VBoxContainer" unique_id=932864978]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 25
+theme_override_styles/separator = SubResource("StyleBoxLine_pbnwl")

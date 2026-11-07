@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhswt5hu42f1u"
-path="res://.godot/imported/scp_logo.svg-1abfc0fa7c833651a9bada3ab3136c91.ctex"
+uid="uid://pud1rq13iuhu"
+path="res://.godot/imported/scp_godot_title.svg-9c16712822463a25e27bf5e7a67590d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://texture/scp_logo.svg"
-dest_files=["res://.godot/imported/scp_logo.svg-1abfc0fa7c833651a9bada3ab3136c91.ctex"]
+source_file="res://texture/icon/scp_godot_title.svg"
+dest_files=["res://.godot/imported/scp_godot_title.svg-9c16712822463a25e27bf5e7a67590d2.ctex"]
 
 [params]
 

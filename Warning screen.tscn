@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dskkbw2s4dw6b"]
+
+[ext_resource type="Shader" uid="uid://o478qcyte4vr" path="res://shaders/RGB_screen_WARNING.gdshader" id="1_qgn1s"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qgn1s"]
+load_path = "res://.godot/imported/RGB_screen_01.png-4cced5c37005385a5929eaa4d097b40a.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pbnwl"]
+shader = ExtResource("1_qgn1s")
+shader_parameter/screen_rgb_texture = SubResource("CompressedTexture2D_qgn1s")
+shader_parameter/pixel_size = 30.0
+
+[node name="Warning" type="Control" unique_id=1681493520]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=450483339]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.05, 0.05, 1)
+
+[node name="Label" type="RichTextLabel" parent="." unique_id=482635304]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[font_size=75][color=#ff7777]WARNING![/color][/font_size]
+This game might contain flashing lights."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1022138528]
+material = SubResource("ShaderMaterial_pbnwl")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

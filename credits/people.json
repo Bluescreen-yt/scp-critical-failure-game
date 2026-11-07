@@ -1,0 +1,6 @@
+{
+	"scp":{ "display_name":"SCP Foundation", "color":"#ffffff", "icon":"res://texture/icon/credits/scp_foundation.svg" },
+	"bluescreen":{ "display_name":"Bluescreen", "color":"#007efe", "icon":"res://texture/icon/credits/bluescreen.png" },
+	"godot":{ "display_name":"Godot game engine", "color":"#478cbf", "icon":"res://texture/icon/credits/godot.svg" },
+	"separator":{ "display_name":"  ", "color":"#00000000", "icon":"" },
+}

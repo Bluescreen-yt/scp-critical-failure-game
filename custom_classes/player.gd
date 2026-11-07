@@ -4,6 +4,7 @@
 @export var health : AdvancedHealthComponent
 @export_range(0.01, 5.0) var sensetivity := 0.25
 @export var camera_sway_effect : CameraEffectOffset
+@export var camera_handheld_effect : CameraEffectShake
 
 var player_look := Vector3.ZERO
 var player_look_velocity := Vector3.ZERO
@@ -44,6 +45,9 @@ func _handle_player_rotation():
 	
 	camera_sway_effect.camera_offset.rotation_offset = player_look_velocity*.0015
 	camera_sway_effect.camera_offset.rotation_offset.z += clampf(player_look_velocity.y*.0025, -45, 45)
+	
+	camera_handheld_effect.shake_speed_multipler = 1+((player_look_velocity.length()*2+linear_velocity.length())*2) + (1.-health.condition_percentage)*3.5
+	camera_handheld_effect.shake_intesivity_multipler = .5+(1.-health.condition_percentage)*3.5
 	
 	%"Camera-origin".rotation_degrees.x = player_look.x
 	$Y.rotation_degrees.y = player_look.y

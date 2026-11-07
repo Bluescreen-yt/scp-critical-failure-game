@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Liquid" format=3 uid="uid://duyhb65mf807e"]
+
+[ext_resource type="Script" uid="uid://ckprrg6i1p4rd" path="res://custom_classes/liquid.gd" id="1_yxjcn"]
+
+[resource]
+script = ExtResource("1_yxjcn")
+metadata/_custom_type_script = "uid://ckprrg6i1p4rd"

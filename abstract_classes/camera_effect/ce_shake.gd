@@ -3,7 +3,7 @@ class_name CameraEffectShake extends CameraEffect
 @export var noise: FastNoiseLite = FastNoiseLite.new()
 @export_range(0.0, 1.0, 0.1) var target_trauma := 0.0
 @export_range(0.0, 2.0, 0.1) var shake_intesivity_multipler := 1.0
-@export_range(0.0, 2.0, 0.1) var shake_peed_multipler := 1.0
+@export_range(0.0, 2.0, 0.1) var shake_speed_multipler := 1.0
 @export_range(0.0, 1.0, 0.1) var shake_smoothness := 7.5
 
 var trauma := 0.0
@@ -20,12 +20,12 @@ func tick(delta: float):
 	
 	var camera_offset = CameraOffset.new()
 	
-	time += delta*shake_peed_multipler
+	time += delta*shake_speed_multipler*trauma
 	
 	var new_offset = Vector3(
-		lerp(last_offset.x, noise.get_noise_1d(time*trauma)*trauma*shake_intesivity_multipler, min(1.0, shake_smoothness*120*delta)),
-		lerp(last_offset.x, noise.get_noise_1d(time*trauma+255.06)*trauma*shake_intesivity_multipler, min(1.0, shake_smoothness*120*delta)),
-		lerp(last_offset.x, noise.get_noise_1d(time*trauma+2585.25)*trauma*shake_intesivity_multipler, min(1.0, shake_smoothness*120*delta))
+		lerp(last_offset.x, noise.get_noise_1d(time)*trauma*shake_intesivity_multipler, min(1.0, shake_smoothness*120*delta)),
+		lerp(last_offset.x, noise.get_noise_1d(time+255.06)*trauma*shake_intesivity_multipler, min(1.0, shake_smoothness*120*delta)),
+		lerp(last_offset.x, noise.get_noise_1d(time+2585.25)*trauma*shake_intesivity_multipler, min(1.0, shake_smoothness*120*delta))
 	)
 	
 	camera_offset.rotation_offset = lerp(last_offset, new_offset, shake_smoothness)

@@ -53,13 +53,14 @@ fractal_lacunarity = 2.478
 fractal_gain = 0.568
 fractal_ping_pong_strength = 1.472
 
-[node name="Player" type="RigidBody3D" unique_id=1681117369 node_paths=PackedStringArray("health", "camera_sway_effect")]
+[node name="Player" type="RigidBody3D" unique_id=1681117369 node_paths=PackedStringArray("health", "camera_sway_effect", "camera_handheld_effect")]
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 script = ExtResource("1_rug40")
 health = NodePath("AdvancedHealthComponent")
 camera_sway_effect = NodePath("Y/Camera-origin/Camera/CameraSway")
+camera_handheld_effect = NodePath("Y/Camera-origin/Camera/CameraHandheldEffect")
 metadata/_custom_type_script = "uid://gpfmn4whtdai"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1704360978]

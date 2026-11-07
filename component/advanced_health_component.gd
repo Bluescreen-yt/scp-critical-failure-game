@@ -30,3 +30,9 @@ func _process(delta: float) -> void:
 			new_death_message_timer = -1
 		
 		death_message_timer = new_death_message_timer
+
+func damage(amount: float, body_part: String):
+	if not body_part in body: printerr(body_part+" does NOT exist.. "); return
+	
+	var part = body[body_part] as AdvHealthBodyParts
+	part.health.damage(amount)

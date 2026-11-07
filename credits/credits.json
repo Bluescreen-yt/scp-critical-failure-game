@@ -1,8 +1,11 @@
 {
-	"[img=x250]res://texture/icon/scp_godot_title.svg[/img]":{},
-	" ":[],
-	"programmers":["bluescreen"],
-	"artists":["bluescreen"],
-	"special thanks":["godot","scp","separator","separator"],
-	"Thank you for playing the game":[]
+  "[img=x250]res://texture/icon/scp_godot_title.svg[/img]": {},
+  " ": [],
+  "programmers": [{"id": "bluescreen", "additional": ""}],
+  "artists": [{"id": "bluescreen", "additional": ""}],
+  "special thanks": [
+	{"id": "godot", "additional": "for making this possible (MIT License)"},
+	{"id": "scp", "additional": "for creating the scp universe (CC BY-SA 3.0)"}
+  ],
+  "Thank you for playing the game": []
 }

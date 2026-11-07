@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://b7xtd2ebb5sfd"]
+
+[node name="DevConsole" type="Control" unique_id=616882176]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1473295584]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 45
+theme_override_constants/margin_top = 45
+theme_override_constants/margin_right = 45
+theme_override_constants/margin_bottom = 45
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=130151566]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer" unique_id=92929512]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer" unique_id=839251335]
+layout_mode = 2
+alignment = 1
+
+[node name="Panel" type="PanelContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=902455825]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Panel" unique_id=2061758618]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=441627081]
+custom_maximum_size = Vector2(-1, 40)
+layout_mode = 2
+size_flags_vertical = 3

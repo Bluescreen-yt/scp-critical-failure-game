@@ -5,19 +5,32 @@
 @export_range(0.01, 5.0) var sensetivity := 0.25
 @export var camera_sway_effect : CameraEffectOffset
 @export var camera_handheld_effect : CameraEffectShake
+@export var blink : FConterComponent
 
 var player_look := Vector3.ZERO
 var player_look_velocity := Vector3.ZERO
 var player_look_velocity_multipler := 0.65
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if Global.player == null:
+		Global.player = self
+	else:
+		printerr("ERROR: PLAYER ALREADY EXISTS!")
+		self.queue_free()
 
+func _exit_tree() -> void:
+	Global.player = null
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	var new_blink = blink.value
+	
+	if not blink.below_threshold:
+		new_blink -= delta*25
+	else:
+		new_blink = 100.
 	
 	var moveVevtor =  Vector3.ZERO
 	moveVevtor.z -= Input.get_action_strength("mv_forward") - Input.get_action_strength("mv_backwards")
@@ -35,9 +48,21 @@ func _process(delta: float) -> void:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-			
+	
+	if Input.is_action_just_pressed("dev_console"):
+		health.damage(15, "head")
+		
+	if Input.is_action_pressed("blink"):
+		new_blink = 0
 	
 	_handle_player_rotation()
+	blink.set_value(new_blink)
+	
+	if Global.player == self:
+		if new_blink==0:
+			Global.is_player_blinking = true
+		else:
+			Global.is_player_blinking = false
 
 
 func _handle_player_rotation():
@@ -55,7 +80,7 @@ func _handle_player_rotation():
 
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		player_look.y -=  event.relative.x * sensetivity
 		player_look.x -=  event.relative.y * sensetivity
 		

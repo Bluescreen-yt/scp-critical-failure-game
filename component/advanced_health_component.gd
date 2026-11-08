@@ -27,6 +27,13 @@ func _ready() -> void:
 	_update_body_list()
 
 func _process(delta: float) -> void:
+	condition = 100
+	var condition_per_part = condition/len(body)
+	for part:String in body:
+		var part_data: AdvHealthBodyParts = body[part]
+		condition -= (condition_per_part*(1-part_data.get_condition_percentage()))*part_data.condition_weight
+	
+	
 	if death_message_timer>=0: # timer logic for death message timer
 		var new_death_message_timer := death_message_timer-delta # predict new var
 		
@@ -37,8 +44,12 @@ func _process(delta: float) -> void:
 		death_message_timer = new_death_message_timer # update message timer
 
 ## applies damage to specifc body part
-func damage(amount: float, body_part: String):
+func damage(amount: float, body_part: String, death_msg: String = "", death_msg_timer: float = 15):
 	if not body_part in body: printerr(body_part+" does NOT exist.. "); return
+	
+	if not death_msg.is_empty():
+		death_message = death_msg
+		death_message_timer = death_message_timer
 	
 	var part = body[body_part] as AdvHealthBodyParts
 	part.health.damage(amount)

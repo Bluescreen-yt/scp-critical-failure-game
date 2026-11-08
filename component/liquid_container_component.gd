@@ -15,6 +15,9 @@ signal spill_tick(overflow_amount: float) ## everytime the spill happens
 @export var enforce_max_liquid: bool = true ## if true it will NOT allow any kind of overflow
 @export var spill_per_sec: float = .5 ## how much can the container spill
 
+var percentage: float:
+	get():
+		return get_total_liquid_units()/max_liquid
 
 func _process(delta: float) -> void:
 	if get_total_liquid_units()>max_liquid:

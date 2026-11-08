@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cmxc0baj7mtp6"]
+
+[ext_resource type="Script" uid="uid://dpsk5k7x7ye0i" path="res://scripts/scp/scp_173.gd" id="1_bgv56"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pbnwl"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_pbnwl"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_bgv56"]
+radius = 1.0
+height = 0.4
+
+[node name="SCP-173" type="RigidBody3D" unique_id=2063641992]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+mass = 5.0
+gravity_scale = 25.0
+script = ExtResource("1_bgv56")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1816313841]
+shape = SubResource("CapsuleShape3D_pbnwl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=308492676]
+mesh = SubResource("SphereMesh_pbnwl")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1746400674]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+mesh = SubResource("SphereMesh_bgv56")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=848415523]
+aabb = AABB(-0.51182455, -1, -0.507963, 1.0236491, 2, 1.015926)
+
+[node name="Player" type="RayCast3D" parent="." unique_id=277176014]
+hit_back_faces = false

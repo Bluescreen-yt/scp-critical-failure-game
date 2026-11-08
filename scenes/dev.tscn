@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cc24qjmquwyuf" path="res://texture/prototype_grid.png" id="2_rs6on"]
 [ext_resource type="Texture2D" uid="uid://ylugl6q3b2ii" path="res://texture/icon/scp/scp_logo_white.svg" id="3_0eiw2"]
 [ext_resource type="Texture2D" uid="uid://chypglb5ss374" path="res://texture/icon/icon.svg" id="3_rm1js"]
+[ext_resource type="PackedScene" uid="uid://cmxc0baj7mtp6" path="res://assets/scp/scp_173.tscn" id="6_e7nro"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wpru5"]
 albedo_texture = ExtResource("2_rs6on")
@@ -82,7 +83,7 @@ adjustment_contrast = 1.05
 [node name="Node3D" type="Node3D" unique_id=690579098]
 
 [node name="Player" parent="." unique_id=1495826800 instance=ExtResource("1_coge5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.3914914, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.987401, 9.86446, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=205192078]
 
@@ -396,3 +397,6 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=753552078]
 environment = SubResource("Environment_pbnwl")
+
+[node name="SCP-173" parent="." unique_id=2063641992 instance=ExtResource("6_e7nro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.617651, 2.8670967, 8.398336)

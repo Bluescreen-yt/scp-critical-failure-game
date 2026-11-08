@@ -1,7 +1,7 @@
 shader_type canvas_item;
+#include "util.gdshaderinc"
 
 uniform sampler2D screen_texture: hint_screen_texture;
-
 uniform sampler2D noise;
 uniform sampler2D gradient;
 uniform vec4 blood_color: source_color;
@@ -11,12 +11,7 @@ float noiseGradientAdd(sampler2D noiseArg, sampler2D gradientArg , float addArg,
 	return (texture(noise, uv).r)*0.3+texture(gradient, uv).r+addArg;
 }
 
-float threshold(float value, float threshold, float under, float above) {
-	if (value>=threshold) {
-		return above;
-	}
-	return under;
-}
+
 
 void vertex() {
 	// Called for every vertex the material is visible on.

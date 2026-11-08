@@ -13,6 +13,9 @@ signal onRevived ## when revived
 @export var damageMultipler :float = 1 ## damage multipler
 var health : float = 0## current health
 var alive : bool = false ## is alive
+var percentage : float: ## percentage 1 - 0
+	get():
+		return health/maxHealth
 
 func _ready() -> void:
 	if startWithMaxHealth: ## if start with max health

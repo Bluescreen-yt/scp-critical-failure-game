@@ -1,7 +1,7 @@
 class_name FConterComponent extends Node
 ## simple FLAOT counter
 
-signal on_changed ## when value got changed
+signal on_changed(value: float) ## when value got changed
 signal on_below_threshold ## when value just got below threshold
 signal on_above_threshold ## when value just got above threshold
 
@@ -22,15 +22,20 @@ func _ready() -> void:
 	else:
 		value = starting_value # if not start with starting value
 
+
 ## change value using this function
 func change(amount: float) -> void:
-	var new_num = value - amount*change_multipler # new val
-	on_changed.emit(new_num)
+	self.set_value(value + amount*change_multipler)
+
+
+## set value using this function
+func set_value(new_value: float) -> void:
+	on_changed.emit(new_value)
 	
-	if new_num<=threshold and not below_threshold: # if just got below threshold
-		on_below_threshold.emit()
+	if new_value<=threshold and not below_threshold: # if just got below threshold
+		on_below_threshold.emit(new_value)
 	
-	if new_num>threshold and below_threshold: # if just got above threshold
-		on_above_threshold.emit()
+	if new_value>threshold and below_threshold: # if just got above threshold
+		on_above_threshold.emit(new_value)
 	
-	value = clampf(new_num, min_number, max_number) # update the value
+	value = clampf(new_value, min_number, max_number) # update the value

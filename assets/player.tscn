@@ -2,6 +2,8 @@
 
 [ext_resource type="Shader" uid="uid://cqmmu4tfxwsq7" path="res://shaders/bloody_screen.gdshader" id="1_insbl"]
 [ext_resource type="Script" uid="uid://gpfmn4whtdai" path="res://custom_classes/player.gd" id="1_rug40"]
+[ext_resource type="Texture2D" uid="uid://d4kbv5duygjpw" path="res://texture/dirty_lens/lens01.png" id="3_ah73p"]
+[ext_resource type="Shader" uid="uid://cql7rrrsp4s8w" path="res://shaders/better_lowend_bloom.gdshader" id="4_7rrun"]
 [ext_resource type="Script" uid="uid://bfl2nwwt1pyg1" path="res://component/advanced_health_component.gd" id="4_mxi64"]
 [ext_resource type="Script" uid="uid://buo5i0necfkd3" path="res://scripts/blood_effect.gd" id="4_nsdob"]
 [ext_resource type="Script" uid="uid://1ty7y1hnhtem" path="res://custom_classes/advanced_camera.gd" id="4_uovkd"]
@@ -12,6 +14,10 @@
 [ext_resource type="Script" uid="uid://dbswuae0ohr0r" path="res://abstract_classes/camera_effect/ce_shake.gd" id="7_nknpd"]
 [ext_resource type="Script" uid="uid://3womgmvsvgi0" path="res://component/liquid_container_component.gd" id="7_uovkd"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7rrun"]
+shader = ExtResource("4_7rrun")
+shader_parameter/dirty_lens = ExtResource("3_ah73p")
+
 [sub_resource type="Gradient" id="Gradient_mxi64"]
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_nsdob"]
@@ -20,12 +26,20 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0s560"]
-frequency = 0.0063
-fractal_type = 2
-fractal_octaves = 1
+frequency = 0.0158
+fractal_octaves = 8
+fractal_lacunarity = 1.985
+fractal_gain = 1.02
+fractal_weighted_strength = 0.47
+fractal_ping_pong_strength = 1.325
 domain_warp_enabled = true
-domain_warp_frequency = 0.025
-domain_warp_fractal_octaves = 1
+domain_warp_type = 1
+domain_warp_amplitude = 15.0
+domain_warp_frequency = 0.045
+domain_warp_fractal_octaves = 2
+domain_warp_fractal_lacunarity = 2.0
+domain_warp_fractal_gain = -0.01
+metadata/_preview_in_3d_space_ = true
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_isng4"]
 noise = SubResource("FastNoiseLite_0s560")
@@ -35,7 +49,7 @@ shader = ExtResource("1_insbl")
 shader_parameter/noise = SubResource("NoiseTexture2D_isng4")
 shader_parameter/gradient = SubResource("GradientTexture2D_nsdob")
 shader_parameter/blood_color = Color(0.8204217, 0.19071287, 0.15936801, 1)
-shader_parameter/add = 0.0
+shader_parameter/add = 1.155
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_isng4"]
 
@@ -46,12 +60,14 @@ script = ExtResource("6_nknpd")
 metadata/_custom_type_script = "uid://bgox166f0fp1h"
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_nknpd"]
-noise_type = 3
-frequency = 0.0555
+frequency = 0.012
 fractal_octaves = 3
-fractal_lacunarity = 2.478
-fractal_gain = 0.568
+fractal_lacunarity = 2.598
+fractal_gain = 0.518
+fractal_weighted_strength = 0.25
 fractal_ping_pong_strength = 1.472
+domain_warp_enabled = true
+domain_warp_amplitude = 15.0
 
 [node name="Player" type="RigidBody3D" unique_id=1681117369 node_paths=PackedStringArray("health", "camera_sway_effect", "camera_handheld_effect")]
 axis_lock_angular_x = true
@@ -64,6 +80,16 @@ camera_handheld_effect = NodePath("Y/Camera-origin/Camera/CameraHandheldEffect")
 metadata/_custom_type_script = "uid://gpfmn4whtdai"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1704360978]
+
+[node name="Bloom" type="ColorRect" parent="CanvasLayer" unique_id=1487354236]
+visible = false
+material = SubResource("ShaderMaterial_7rrun")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.6487615, 0.6487614, 0.6487614, 1)
 
 [node name="Blood" type="ColorRect" parent="CanvasLayer" unique_id=353177943 node_paths=PackedStringArray("health_component")]
 material = SubResource("ShaderMaterial_pbnwl")

@@ -23,10 +23,10 @@ void vertex() {
 }
 
 void fragment() {
-	float layer1Alpha = threshold(noiseGradientAdd(noise, gradient, add, UV), 1.0, 0.0, 1.0);
-	float layer2Alpha = threshold(noiseGradientAdd(noise, gradient, add-0.25, UV), 1.0, 0.0, 1.0);
-	float layer3Alpha = threshold(noiseGradientAdd(noise, gradient, add-0.5, UV), 1.0, 0.0, 1.0);
-	float layer4Alpha = threshold(noiseGradientAdd(noise, gradient, add-0.75, UV), 1.0, 0.0, 1.0);
+	float layer1Alpha = threshold(noiseGradientAdd(noise, gradient, add-0.5, UV), 1.0, 0.0, 1.0);
+	float layer2Alpha = threshold(noiseGradientAdd(noise, gradient, add-0.6, UV), 1.0, 0.0, 1.0);
+	float layer3Alpha = threshold(noiseGradientAdd(noise, gradient, add-0.8, UV), 1.0, 0.0, 1.0);
+	float layer4Alpha = threshold(noiseGradientAdd(noise, gradient, add-1., UV), 1.0, 0.0, 1.0);
 	float layer5Alpha = threshold(noiseGradientAdd(noise, gradient, add-1.5, UV), 1.0, 0.0, 1.0);
 	
 	vec3 l1 = blood_color.rgb;

@@ -44,5 +44,6 @@ If you need help with the structure of the project:
 - `res://shaders/` - For shaders.
 - `res://textures/` - Contains textures, BUT **NOT** materials.
 - `res://ui/` - Stores UI stuff.
+- `res://TODO.md/` - todo list
 
 If you're making a new folder, please document it here. Thanks!

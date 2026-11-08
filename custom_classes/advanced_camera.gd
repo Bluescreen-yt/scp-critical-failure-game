@@ -1,8 +1,11 @@
 @icon("res://dev_textures/camera.png")
-class_name AdvancedCamera extends Camera3D
+class_name AdvancedCamera
+extends Camera3D
+## advanced camera system
 
-@export var camera_effects :Array[CameraEffect] = []
-@export var base_offset :CameraOffset = CameraOffset.new()
+@export var camera_effects :Array[CameraEffect] = [] ## list of effects
+@export var base_offset :CameraOffset = CameraOffset.new() ## base offset
+
 
 func _process(delta: float) -> void:
 	var offset = CameraOffset.new()

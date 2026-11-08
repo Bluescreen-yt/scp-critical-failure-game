@@ -1,16 +1,16 @@
 @tool extends ColorRect
 
-@export var shader_noise :FastNoiseLite:
+@export var shader_noise :FastNoiseLite: ## shader noise
 	set(value): update_configuration_warnings(); shader_noise = value
-@export var noise_pulse :FastNoiseLite:
+@export var noise_pulse :FastNoiseLite: ## noise for heart pulse
 	set(value): update_configuration_warnings(); noise_pulse = value
-@export var blood_shader :ShaderMaterial:
+@export var blood_shader :ShaderMaterial: ## blood effect shader
 	set(value): update_configuration_warnings(); blood_shader = value
-@export var health_component :AdvancedHealthComponent:
+@export var health_component :AdvancedHealthComponent: ## advanced health component
 	set(value): update_configuration_warnings(); health_component = value
 
-var TIME := 0.0
-var trauma := 1.0
+var TIME := 0.0 ## time
+var trauma := 1.0 ## trauma
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings :PackedStringArray = []

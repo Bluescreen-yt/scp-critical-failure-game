@@ -6,9 +6,9 @@ Anyways, straight to the point.
 
 ## Rules / Guidelines
 
-For people who want to contribute to the source code (such as fixing bugs, adding new features, reworking stuff, etc.):
-1. **Clean Code:** Please maintain a clean codebase (not a strict rule, but very welcome). More info on the [official Godot docs](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html).
-2. **Credits:** Remember to credit yourself in `credits/people.json` and `credits/credits.json`. (If you don't have an icon, just use `"res://texture/icon/credits/no_icon.png"`. Also, please use the right category in `credits.json`—if one doesn't exist, you can make one.)
+For people who want to contribute to the source code ( such as fixing bugs, adding new features, reworking stuff, etc. ):
+1. **Clean Code:** Please maintain a clean codebase ( not a strict rule, but very welcome ). More info on the [official Godot docs](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html).
+2. **Credits:** Remember to credit yourself in `credits/people.json` and `credits/credits.json`. ( If you don't have an icon, just use `"res://texture/icon/credits/no_icon.png"`. Also, please use the right category in `credits.json`. if one doesn't exist, you can make one. )
 
 ## How do I contribute?
 
@@ -23,6 +23,8 @@ Actually quite simple:
 
 Thanks for reading this file ;)
 
+if you're intrested in helping with coding but don't have idea on what to add / change, check the TODO.md or ISSUES tab on github
+or if you don't know coding, you can suggest ideas on discord ( will be made soon )
 
 If you need help with the structure of the project:
 - `res://abstract_classes/{YOUR_CUSTOM_CLASS}` - Used for classes that are meant to be extended and not used directly (like `camera_effects`). It is also recommended to put all classes that extend from the abstract classes in this folder just for organization.

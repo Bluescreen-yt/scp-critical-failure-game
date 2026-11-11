@@ -3,7 +3,7 @@ class_name AdvHealthBodyParts
 extends Node
 ## body part for adv health component
 
-const BLOOD_LIQUID = preload("res://assets/liquids/blood.tres") 
+const BLOOD_LIQUID = preload("res://assets/liquids/piss.tres")
 
 @export var health: HealthComponent = HealthComponent.new() ## health component
 @export var blood: LiquidContainerComponent = LiquidContainerComponent.new() ## container component
@@ -18,7 +18,9 @@ func get_drain_color():
 	return blood.get_liquid_color()
 
 func  _ready() -> void:
-	blood.content[BLOOD_LIQUID] = 100.0
+	blood.content[preload("res://assets/liquids/water.tres")] = 100.0
+	
+	
 func get_condition_percentage():
 	if health.health < 10:
 		return 0.
@@ -32,4 +34,4 @@ func _process(delta: float) -> void:
 		health.damage(-delta)
 		
 	if blood.percentage>.25 and blood.percentage!=7.: # if blood precentage is bigger than 25% start adding blood
-		blood.add_liquid(BLOOD_LIQUID, delta*5*health.percentage)
+		blood.add_liquid(BLOOD_LIQUID, delta*1.5*health.percentage)

@@ -12,6 +12,8 @@ var condition: float = 100 ## condition
 var condition_percentage: float: ## condition percentage ( from 0.0 to 1.0 )
 	get():
 		return condition/100
+var drain_per_second: float = 0
+var drain_color: Color = Color.BLACK
 
 ## updates body parts list
 func _update_body_list():
@@ -27,12 +29,25 @@ func _ready() -> void:
 	_update_body_list()
 
 func _process(delta: float) -> void:
-	condition = 100
+	condition = 100.
+	drain_per_second = 0.
+	drain_color = Color(0, 0, 0, 0)
+	var drain_color_weight = 0
 	var condition_per_part = condition/len(body)
 	for part:String in body:
 		var part_data: AdvHealthBodyParts = body[part]
-		condition -= (condition_per_part*(1-part_data.get_condition_percentage()))*part_data.condition_weight
+		var part_weighted = (condition_per_part*(1-part_data.get_condition_percentage()))*part_data.condition_weight
+		condition -= part_weighted
+		drain_per_second += part_data.drain_per_second
+		
+		if part_data.drain_per_second>0:
+			drain_color_weight += 1
+			drain_color += part_data.get_drain_color()
 	
+	if drain_color_weight>0:
+		drain_color = drain_color/drain_color_weight ## TODO: IMPROVE COLOR LOGIC
+	else:
+		drain_color = Color(0, 0, 0, 0)
 	
 	if death_message_timer>=0: # timer logic for death message timer
 		var new_death_message_timer := death_message_timer-delta # predict new var

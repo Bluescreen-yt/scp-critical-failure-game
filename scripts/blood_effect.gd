@@ -47,3 +47,4 @@ func _process(delta: float) -> void:
 	
 	shader_noise.offset = lerp(shader_noise.offset, target_noise_offset, clampf(15.*delta, 0., 1.) )
 	blood_shader.set_shader_parameter("add", lerpf(current_blood, target_blood, 0.75*delta))
+	blood_shader.set_shader_parameter("blood_color", health_component.drain_color)

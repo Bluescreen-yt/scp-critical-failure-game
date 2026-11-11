@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Liquid" format=3 uid="uid://b85t1w7lk280w"]
+
+[ext_resource type="Script" uid="uid://ckprrg6i1p4rd" path="res://custom_resources/liquid.gd" id="1_ngqum"]
+
+[resource]
+script = ExtResource("1_ngqum")
+liquid_name = "blood"
+color = Color(0.67058825, 0, 0, 0.6666667)
+metadata/_custom_type_script = "uid://ckprrg6i1p4rd"

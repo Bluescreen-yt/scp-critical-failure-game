@@ -17,6 +17,29 @@
 [ext_resource type="Script" uid="uid://3womgmvsvgi0" path="res://component/liquid_container_component.gd" id="7_uovkd"]
 [ext_resource type="Script" uid="uid://c11kpn8w84o4x" path="res://component/f_counter_component.gd" id="15_lgdun"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cbn5g"]
+transparency = 1
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(0.86, 0, 0, 0.49019608)
+
+[sub_resource type="Curve" id="Curve_dclhl"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.4514813, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dclhl"]
+curve = SubResource("Curve_dclhl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dclhl"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_dclhl")
+
+[sub_resource type="QuadMesh" id="QuadMesh_dclhl"]
+material = SubResource("StandardMaterial3D_cbn5g")
+orientation = 1
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7rrun"]
 shader = ExtResource("4_7rrun")
 shader_parameter/dirty_lens = ExtResource("3_ah73p")
@@ -53,8 +76,8 @@ noise = SubResource("FastNoiseLite_0s560")
 shader = ExtResource("1_insbl")
 shader_parameter/noise = SubResource("NoiseTexture2D_isng4")
 shader_parameter/gradient = SubResource("GradientTexture2D_nsdob")
-shader_parameter/blood_color = Color(0.8204217, 0.19071287, 0.15936801, 1)
-shader_parameter/add = 0.835
+shader_parameter/blood_color = Color(0.8444099, 0, 0.38354737, 1)
+shader_parameter/add = 0.745
 
 [sub_resource type="Gradient" id="Gradient_lgdun"]
 
@@ -111,7 +134,23 @@ frequency = 0.0193
 fractal_gain = 0.52
 fractal_weighted_strength = 0.16
 
-[node name="Player" type="RigidBody3D" unique_id=1681117369 node_paths=PackedStringArray("health", "camera_sway_effect", "camera_handheld_effect", "blink")]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_10u8k"]
+particle_flag_align_y = true
+spread = 90.0
+initial_velocity_min = -5.0
+gravity = Vector3(0, -50, 0)
+linear_accel_min = -2.2351742e-06
+linear_accel_max = 0.99999774
+scale_over_velocity_max = 2.0
+sub_emitter_mode = 3
+sub_emitter_amount_at_collision = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_dclhl"]
+material = SubResource("StandardMaterial3D_cbn5g")
+flip_faces = true
+size = Vector3(0.025, 0.25, 0.025)
+
+[node name="Player" type="RigidBody3D" unique_id=1681117369 node_paths=PackedStringArray("health", "camera_sway_effect", "camera_handheld_effect", "blink", "blood_particles")]
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
@@ -120,7 +159,16 @@ health = NodePath("AdvancedHealthComponent")
 camera_sway_effect = NodePath("Y/Camera-origin/Camera/CameraSway")
 camera_handheld_effect = NodePath("Y/Camera-origin/Camera/CameraHandheldEffect")
 blink = NodePath("Blink")
+blood_particles = NodePath("BleedingParticles")
+blood_particles_material = SubResource("StandardMaterial3D_cbn5g")
 metadata/_custom_type_script = "uid://gpfmn4whtdai"
+
+[node name="BloodSpots" type="GPUParticles3D" parent="." unique_id=2120210800]
+emitting = false
+amount = 65536
+lifetime = 15.0
+process_material = SubResource("ParticleProcessMaterial_dclhl")
+draw_pass_1 = SubResource("QuadMesh_dclhl")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1704360978]
 
@@ -148,6 +196,7 @@ blood_shader = SubResource("ShaderMaterial_pbnwl")
 health_component = NodePath("../../AdvancedHealthComponent")
 
 [node name="Blink" type="ColorRect" parent="CanvasLayer" unique_id=777656603 node_paths=PackedStringArray("blink")]
+visible = false
 material = SubResource("ShaderMaterial_0s560")
 anchors_preset = 15
 anchor_right = 1.0
@@ -209,7 +258,7 @@ metadata/_custom_type_script = "uid://bfl2nwwt1pyg1"
 script = ExtResource("6_nsdob")
 health = NodePath("HealthComponent")
 blood = NodePath("LiquidContainerComponent")
-condition_weight = 15.0
+condition_weight = 25.0
 metadata/_custom_type_script = "uid://c4w3h852pid1j"
 
 [node name="HealthComponent" type="Node" parent="AdvancedHealthComponent/Head" unique_id=13022964]
@@ -461,3 +510,11 @@ metadata/_custom_type_script = "uid://3womgmvsvgi0"
 [node name="Blink" type="Node" parent="." unique_id=1649453532]
 script = ExtResource("15_lgdun")
 metadata/_custom_type_script = "uid://c11kpn8w84o4x"
+
+[node name="BleedingParticles" type="GPUParticles3D" parent="." unique_id=1112219314]
+transform = Transform3D(0.70710677, -0.70710677, 0, 0.5, 0.5, -0.70710695, 0.50000006, 0.50000006, 0.7071069, 0, 0, 0)
+emitting = false
+amount = 256
+sub_emitter = NodePath("../BloodSpots")
+process_material = SubResource("ParticleProcessMaterial_10u8k")
+draw_pass_1 = SubResource("BoxMesh_dclhl")

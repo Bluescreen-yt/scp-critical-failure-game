@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cc24qjmquwyuf" path="res://texture/prototype_grid.png" id="2_rs6on"]
 [ext_resource type="Texture2D" uid="uid://ylugl6q3b2ii" path="res://texture/icon/scp/scp_logo_white.svg" id="3_0eiw2"]
 [ext_resource type="Texture2D" uid="uid://chypglb5ss374" path="res://texture/icon/icon.svg" id="3_rm1js"]
+[ext_resource type="CompressedTexture3D" uid="uid://c5tkebmhn4t6d" path="res://scenes/dev/dev.GPUParticlesCollisionSDF3D_data.exr" id="5_4te8u"]
 [ext_resource type="PackedScene" uid="uid://cmxc0baj7mtp6" path="res://assets/scp/scp_173.tscn" id="6_e7nro"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wpru5"]
@@ -387,6 +388,11 @@ light_volumetric_fog_energy = 5.0
 shadow_enabled = true
 spot_range = 38.542
 spot_attenuation = 0.91
+
+[node name="GPUParticlesCollisionSDF3D" type="GPUParticlesCollisionSDF3D" parent="StaticBody3D" unique_id=1518821489]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.703217, 6.338623, 12.32814)
+size = Vector3(41.17206, 14.677246, 37.53842)
+texture = ExtResource("5_4te8u")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=918030687]
 transform = Transform3D(-0.4999999, -0.6300432, 0.5941764, 0, 0.6860958, 0.72751117, -0.86602545, 0.36375552, -0.34304783, -8.980737, 6.676611, -0.07700539)

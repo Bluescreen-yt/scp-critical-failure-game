@@ -8,7 +8,7 @@ func _ready() -> void:
 			is_player_blinking = val
 	) # update is_player_blinking
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	var target_vel = Vector3()
 	if Global.player != null: # if player exists
 		$Player.target_position = $Player.to_local(Global.player.global_position)  # set raycast to player's position
@@ -21,5 +21,5 @@ func _process(delta: float) -> void:
 			
 			if self.global_position.distance_to(Global.player.global_position)<2: # TO DO: rework this to work universaly for any enitty ( ignore scp group )
 				Global.player.health.damage(9999, "Head")
-		
+
 	apply_impulse(target_vel-linear_velocity)

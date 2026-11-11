@@ -6,10 +6,15 @@
 @export var camera_sway_effect : CameraEffectOffset
 @export var camera_handheld_effect : CameraEffectShake
 @export var blink : FConterComponent
+@export var blood_particles : GPUParticles3D
+@export var blood_particles_material : StandardMaterial3D
 
 var player_look := Vector3.ZERO
 var player_look_velocity := Vector3.ZERO
 var player_look_velocity_multipler := 0.65
+
+
+var wakeup_timer: SceneTreeTimer = null # timer for opening eyes
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -25,13 +30,31 @@ func _exit_tree() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var new_blink = blink.value
 	
-	if not blink.below_threshold:
-		new_blink -= delta*25
+	if Input.is_action_just_pressed("interact"):
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	if Input.is_action_just_pressed("dev_console"):
+		health.damage(15, "Head")
+		
+	_handle_player_rotation()
+	_handle_blinking(delta)
+	
+	if int(health.drain_per_second)>0:
+		blood_particles.emitting = true
+		blood_particles_material.albedo_color = health.drain_color
+		blood_particles.amount = int(health.drain_per_second*5)
 	else:
-		new_blink = 100.
-	
+		blood_particles.emitting = false
+
+func _physics_process(delta: float) -> void:
+	_handle_movement(delta)
+
+## handles player's movement
+func _handle_movement(delta: float):
 	var moveVevtor =  Vector3.ZERO
 	moveVevtor.z -= Input.get_action_strength("mv_forward") - Input.get_action_strength("mv_backwards")
 	moveVevtor.x -= Input.get_action_strength("mv_left") - Input.get_action_strength("mv_right")
@@ -42,29 +65,41 @@ func _process(delta: float) -> void:
 	var TargetVel = moveDir-linear_velocity*0.9
 	TargetVel = TargetVel * Vector3(1,0,1)
 	apply_impulse(TargetVel)
+
+
+
+## handles blinking
+func _handle_blinking(delta: float):
+	var new_blink = blink.value
 	
-	if Input.is_action_just_pressed("interact"):
-		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		else:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if not blink.below_threshold:
+		new_blink -= delta*25
+	else:
+		new_blink = "wakey wakey"
 	
-	if Input.is_action_just_pressed("dev_console"):
-		health.damage(15, "head")
-		
 	if Input.is_action_pressed("blink"):
-		new_blink = 0
+		new_blink = 0.
 	
-	_handle_player_rotation()
-	blink.set_value(new_blink)
-	
-	if Global.player == self:
-		if new_blink==0:
-			Global.is_player_blinking = true
-		else:
+	if new_blink is String and new_blink == "wakey wakey":
+		if wakeup_timer==null:
+			
+			if not Global.is_player_blinking:
+				Global.is_player_blinking = true
+			
+			wakeup_timer = get_tree().create_timer(.05)
+			wakeup_timer.timeout.connect(func(): blink.set_value(100), CONNECT_ONE_SHOT)
+	else:
+		if new_blink is float and new_blink==0:
+			if not Global.is_player_blinking:
+				Global.is_player_blinking = true
+		
+		if wakeup_timer!=null and wakeup_timer is SceneTreeTimer:
+			wakeup_timer = null
 			Global.is_player_blinking = false
+		
+		blink.set_value(new_blink)
 
-
+## handles player's rotation
 func _handle_player_rotation():
 	player_look_velocity *= player_look_velocity_multipler
 	

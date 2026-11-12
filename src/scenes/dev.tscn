@@ -41,6 +41,21 @@ emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 15.0
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4te8u"]
+load_path = "res://.godot/imported/prototype_grid.png-fd4c109a28d1217ca1c34bc92ed95997.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hsggt"]
+albedo_color = Color(1, 0, 0, 1)
+albedo_texture = SubResource("CompressedTexture2D_4te8u")
+metallic = 0.1
+roughness = 0.95
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pbnwl"]
+size = Vector3(0.25, 0.25, 0.25)
+
 [sub_resource type="Environment" id="Environment_pbnwl"]
 background_energy_multiplier = 0.2
 ambient_light_energy = 0.0
@@ -355,6 +370,16 @@ material = SubResource("StandardMaterial3D_e7nro")
 light_energy = 0.25
 shadow_enabled = true
 omni_range = 246.754
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="StaticBody3D/CSGCombiner3D" unique_id=604899084]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.771504, 2.2865076, 7.1968465)
+size = Vector3(0.24, 0.24, 0.24)
+material = SubResource("StandardMaterial3D_hsggt")
+
+[node name="Area3D" type="Area3D" parent="StaticBody3D/CSGCombiner3D/CSGBox3D17" unique_id=1366880927]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/CSGCombiner3D/CSGBox3D17/Area3D" unique_id=1493219769]
+shape = SubResource("BoxShape3D_pbnwl")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="StaticBody3D" unique_id=1233105897]
 transform = Transform3D(0.08583167, 0.17364818, -0.98106027, -0.015134437, 0.9848078, 0.17298739, 0.9961947, -2.796976e-09, 0.08715577, 11, 10, 3.6999998)

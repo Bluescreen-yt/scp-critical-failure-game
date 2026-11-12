@@ -18,7 +18,7 @@ func get_drain_color():
 	return blood.get_liquid_color()
 
 func  _ready() -> void:
-	blood.content[preload("res://assets/liquids/acid.tres")] = 100.0
+	blood.content[BLOOD_LIQUID] = 100.0
 	
 	
 func get_condition_percentage():

@@ -19,26 +19,39 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cbn5g"]
 transparency = 1
+blend_mode = 3
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
-albedo_color = Color(0.86, 0, 0, 0.49019608)
+albedo_color = Color(0.5019608, 0, 0, 0.6666667)
+metallic = 0.25
+roughness = 0.75
 
-[sub_resource type="Curve" id="Curve_dclhl"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.4514813, 0.0, 0, 0]
-point_count = 2
+[sub_resource type="Curve" id="Curve_cbn5g"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.6935484, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -8.707874, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_dclhl"]
+curve = SubResource("Curve_cbn5g")
+
+[sub_resource type="Curve" id="Curve_dclhl"]
+_data = [Vector2(0, 0.005617976), 0.0, 20.20225, 0, 0, Vector2(0.22903226, 0.9044944), -1.057384, -1.057384, 0, 0, Vector2(0.66129035, 0.7359551), -0.41247806, -0.41247806, 0, 0, Vector2(1, 0), -7.7469954, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_cbn5g"]
 curve = SubResource("Curve_dclhl")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dclhl"]
-particle_flag_disable_z = true
+particle_flag_align_y = true
+particle_flag_rotate_y = true
 particle_flag_damping_as_friction = true
 gravity = Vector3(0, 0, 0)
-scale_curve = SubResource("CurveTexture_dclhl")
+scale_curve = SubResource("CurveTexture_cbn5g")
+alpha_curve = SubResource("CurveTexture_dclhl")
 
-[sub_resource type="QuadMesh" id="QuadMesh_dclhl"]
+[sub_resource type="SphereMesh" id="SphereMesh_e7nro"]
 material = SubResource("StandardMaterial3D_cbn5g")
-orientation = 1
+radius = 0.25
+height = 0.1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7rrun"]
 shader = ExtResource("4_7rrun")
@@ -136,12 +149,14 @@ fractal_weighted_strength = 0.16
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_10u8k"]
 particle_flag_align_y = true
-spread = 90.0
-initial_velocity_min = -5.0
-gravity = Vector3(0, -50, 0)
-linear_accel_min = -2.2351742e-06
-linear_accel_max = 0.99999774
+angle_min = -4.9999895
+angle_max = 5.000011
+initial_velocity_min = 2.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, -15, 0)
+damping_max = 0.5
 scale_over_velocity_max = 2.0
+collision_mode = 2
 sub_emitter_mode = 3
 sub_emitter_amount_at_collision = 1
 
@@ -165,10 +180,11 @@ metadata/_custom_type_script = "uid://gpfmn4whtdai"
 
 [node name="BloodSpots" type="GPUParticles3D" parent="." unique_id=2120210800]
 emitting = false
-amount = 65536
-lifetime = 15.0
+amount = 1024
+lifetime = 1.5
+collision_base_size = 1.0
 process_material = SubResource("ParticleProcessMaterial_dclhl")
-draw_pass_1 = SubResource("QuadMesh_dclhl")
+draw_pass_1 = SubResource("SphereMesh_e7nro")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1704360978]
 
@@ -196,7 +212,6 @@ blood_shader = SubResource("ShaderMaterial_pbnwl")
 health_component = NodePath("../../AdvancedHealthComponent")
 
 [node name="Blink" type="ColorRect" parent="CanvasLayer" unique_id=777656603 node_paths=PackedStringArray("blink")]
-visible = false
 material = SubResource("ShaderMaterial_0s560")
 anchors_preset = 15
 anchor_right = 1.0
@@ -512,9 +527,14 @@ script = ExtResource("15_lgdun")
 metadata/_custom_type_script = "uid://c11kpn8w84o4x"
 
 [node name="BleedingParticles" type="GPUParticles3D" parent="." unique_id=1112219314]
-transform = Transform3D(0.70710677, -0.70710677, 0, 0.5, 0.5, -0.70710695, 0.50000006, 0.50000006, 0.7071069, 0, 0, 0)
+transform = Transform3D(-4.3711385e-08, 0.9999999, 0, -0.9999999, -4.3711385e-08, 0, 0, 0, 1, 0, 0.25076675, 0)
 emitting = false
 amount = 256
 sub_emitter = NodePath("../BloodSpots")
+preprocess = 0.5
+explosiveness = 0.1
+randomness = 0.25
+collision_base_size = 0.5
+trail_lifetime = 10.0
 process_material = SubResource("ParticleProcessMaterial_10u8k")
 draw_pass_1 = SubResource("BoxMesh_dclhl")

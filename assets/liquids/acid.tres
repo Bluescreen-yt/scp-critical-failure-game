@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Liquid" format=3 uid="uid://buu7citrb4i67"]
+
+[ext_resource type="Script" uid="uid://ckprrg6i1p4rd" path="res://custom_resources/liquid.gd" id="1_cu8h8"]
+
+[resource]
+script = ExtResource("1_cu8h8")
+color = Color(0.37183937, 0.92624724, 0, 0.12941177)
+metadata/_custom_type_script = "uid://ckprrg6i1p4rd"

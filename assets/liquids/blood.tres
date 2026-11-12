@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_ngqum")
 liquid_name = "blood"
-color = Color(0.67058825, 0, 0, 0.6666667)
+color = Color(0.5007412, 3.730133e-07, 1.92523e-07, 0.6666667)
 metadata/_custom_type_script = "uid://ckprrg6i1p4rd"

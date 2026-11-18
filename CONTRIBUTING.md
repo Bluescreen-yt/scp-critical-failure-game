@@ -2,7 +2,7 @@
 
 First thing, thank you for being interested in the game enough to even read the `CONTRIBUTING.md` file!
 You're welcome whether you're just fixing bugs, adding ideas to `TO-DO.md`, providing assets like models, images, sounds, shaders, or code, documenting code, or even just fixing spelling mistakes.
-Anyways, straight to the point.
+Anyways, straight to the point..
 
 ## Rules / Guidelines
 
@@ -44,6 +44,7 @@ If you need help with the structure of the project:
 - `res://shaders/` - For shaders.
 - `res://textures/` - Contains textures, BUT **NOT** materials.
 - `res://ui/` - Stores UI stuff.
-- `res://TODO.md/` - todo list
+
+- `TODO.md` - todo list
 
 If you're making a new folder, please document it here. Thanks!

@@ -1,0 +1,7 @@
+{
+	"scp":{ "display_name":"SCP Foundation", "color":"#afafaf", "icon":"res://textures/icon/credits/scp_foundation.svg" },
+	"bluescreen":{ "display_name":"Bluescreen", "color":"#007efe", "icon":"res://textures/icon/credits/bluescreen.png" },
+	"godot":{ "display_name":"Godot game engine", "color":"#478cbf", "icon":"res://textures/icon/credits/godot.svg" },
+	"scpcb":{ "display_name":"SCP: Contaiment Breach", "color":"#afafaf", "icon":"res://textures/icon/credits/scp_foundation.svg" },
+	"separator":{ "display_name":"  ", "color":"#00000000", "icon":"" },
+}

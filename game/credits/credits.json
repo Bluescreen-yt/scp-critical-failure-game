@@ -1,0 +1,15 @@
+{
+  "[img=x250]res://texture/icon/scp_cf_title.svg[/img]": {},
+  " ": [],
+  "programmers": [{"id": "bluescreen", "additional": ""}],
+  "artists": [{"id": "bluescreen", "additional": ""}],
+  "special thanks": [
+	{"id": "godot", "additional": "for making this possible (MIT License)"},
+	{"id": "scp", "additional": "for creating the scp universe (CC BY-SA 3.0)"},
+	{"id": "scpcb", "additional": "main inspiration"}
+  ],
+  "Thank you for playing the game": [],
+  "  ": [],
+  "   ": [],
+  "[img=x250]res://textures/credits_images/footer.svg[/img]": {}
+}
